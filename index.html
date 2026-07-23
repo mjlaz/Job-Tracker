@@ -1,0 +1,1220 @@
+<title>Job Search Log</title>
+<style>
+  :root {
+    --bg: #F3F5F1;
+    --bg-raised: #FFFFFF;
+    --ink: #1E2A28;
+    --ink-soft: #52605C;
+    --ink-faint: #8A9591;
+    --line: #DCE3DD;
+    --line-soft: #E8ECE6;
+    --accent: #2B6E64;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #E1EDE9;
+    --applied: #5B6B7A;
+    --applied-bg: #E7EAEE;
+    --interview: #A8752F;
+    --interview-bg: #F3E7D3;
+    --offer: #3F8F5F;
+    --offer-bg: #E0EFE4;
+    --rejected: #B5484B;
+    --rejected-bg: #F7E2E2;
+    --ghosted: #8A8478;
+    --ghosted-bg: #ECE9E3;
+    --shadow: 0 1px 2px rgba(30, 42, 40, 0.06), 0 4px 16px rgba(30, 42, 40, 0.05);
+    --focus: #2B6E64;
+    --overlay: rgba(20, 28, 26, 0.45);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12181A;
+      --bg-raised: #1B2325;
+      --ink: #E7ECE9;
+      --ink-soft: #A6B3AE;
+      --ink-faint: #6C7975;
+      --line: #2B3638;
+      --line-soft: #232D2F;
+      --accent: #52A99C;
+      --accent-ink: #0D1414;
+      --accent-soft: #1D3330;
+      --applied: #9AAAC4;
+      --applied-bg: #232B36;
+      --interview: #DCAA5C;
+      --interview-bg: #362B18;
+      --offer: #7FC99A;
+      --offer-bg: #1C3324;
+      --rejected: #E48B8D;
+      --rejected-bg: #3A2223;
+      --ghosted: #A6A092;
+      --ghosted-bg: #2A2822;
+      --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+      --focus: #6FC0B2;
+      --overlay: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #12181A;
+    --bg-raised: #1B2325;
+    --ink: #E7ECE9;
+    --ink-soft: #A6B3AE;
+    --ink-faint: #6C7975;
+    --line: #2B3638;
+    --line-soft: #232D2F;
+    --accent: #52A99C;
+    --accent-ink: #0D1414;
+    --accent-soft: #1D3330;
+    --applied: #9AAAC4;
+    --applied-bg: #232B36;
+    --interview: #DCAA5C;
+    --interview-bg: #362B18;
+    --offer: #7FC99A;
+    --offer-bg: #1C3324;
+    --rejected: #E48B8D;
+    --rejected-bg: #3A2223;
+    --ghosted: #A6A092;
+    --ghosted-bg: #2A2822;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.35);
+    --focus: #6FC0B2;
+    --overlay: rgba(0, 0, 0, 0.6);
+  }
+
+  :root[data-theme="light"] {
+    --bg: #F3F5F1;
+    --bg-raised: #FFFFFF;
+    --ink: #1E2A28;
+    --ink-soft: #52605C;
+    --ink-faint: #8A9591;
+    --line: #DCE3DD;
+    --line-soft: #E8ECE6;
+    --accent: #2B6E64;
+    --accent-ink: #FFFFFF;
+    --accent-soft: #E1EDE9;
+    --applied: #5B6B7A;
+    --applied-bg: #E7EAEE;
+    --interview: #A8752F;
+    --interview-bg: #F3E7D3;
+    --offer: #3F8F5F;
+    --offer-bg: #E0EFE4;
+    --rejected: #B5484B;
+    --rejected-bg: #F7E2E2;
+    --ghosted: #8A8478;
+    --ghosted-bg: #ECE9E3;
+    --shadow: 0 1px 2px rgba(30, 42, 40, 0.06), 0 4px 16px rgba(30, 42, 40, 0.05);
+    --focus: #2B6E64;
+    --overlay: rgba(20, 28, 26, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Charter", "Iowan Old Style", "Georgia", serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .wrap {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  header {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .eyebrow {
+    font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  h1 {
+    font-size: 34px;
+    line-height: 1.15;
+    margin: 0;
+    font-weight: 600;
+    text-wrap: balance;
+    letter-spacing: -0.01em;
+  }
+
+  .sub {
+    font-family: -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--ink-soft);
+    font-size: 14.5px;
+    max-width: 62ch;
+    line-height: 1.5;
+  }
+
+  button, input, select { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; }
+
+  button.outline {
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--bg-raised);
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 8px 14px;
+    cursor: pointer;
+  }
+  button.outline:hover { border-color: var(--accent); color: var(--accent); }
+  button.outline.danger:hover { border-color: var(--rejected); color: var(--rejected); }
+
+  /* next-up banner */
+  .banner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--accent-soft);
+    border: 1px solid var(--accent);
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+  }
+  .banner .stripe {
+    width: 4px;
+    align-self: stretch;
+    background: var(--accent);
+    border-radius: 3px;
+    flex-shrink: 0;
+  }
+  .banner .body { flex: 1; min-width: 0; }
+  .banner .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .banner .detail {
+    font-size: 14.5px;
+    color: var(--ink);
+    margin-top: 2px;
+  }
+  .banner .detail b { font-weight: 600; }
+  .banner .actions { display: flex; gap: 8px; flex-shrink: 0; }
+  .banner button.solid {
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    border-radius: 7px;
+    padding: 8px 14px;
+    cursor: pointer;
+  }
+
+  /* stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+    margin: 0 0 32px;
+  }
+  .stat {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 14px 12px;
+    box-shadow: var(--shadow);
+  }
+  .stat .n {
+    font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1;
+  }
+  .stat .l {
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 6px;
+  }
+  .stat.total .n { color: var(--ink); }
+  .stat.applied .n { color: var(--applied); }
+  .stat.interview .n { color: var(--interview); }
+  .stat.offer .n { color: var(--offer); }
+  .stat.rejected .n { color: var(--rejected); }
+
+  /* form */
+  form.add {
+    background: var(--bg-raised);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px;
+    box-shadow: var(--shadow);
+    margin-bottom: 28px;
+  }
+  .add-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 1.3fr 1fr 1fr auto;
+    gap: 10px;
+    align-items: end;
+  }
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .field label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+  }
+  input, select, textarea {
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: 7px;
+    padding: 9px 10px;
+    width: 100%;
+  }
+  input:focus, select:focus, textarea:focus, button:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 1px;
+  }
+  button.primary {
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--accent);
+    color: var(--accent-ink);
+    border: none;
+    border-radius: 7px;
+    padding: 10px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  button.primary:hover { filter: brightness(1.06); }
+
+  /* filter bar */
+  .filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    font-size: 12.5px;
+    font-weight: 600;
+    border: 1px solid var(--line);
+    background: var(--bg-raised);
+    color: var(--ink-soft);
+    border-radius: 999px;
+    padding: 6px 13px;
+    cursor: pointer;
+  }
+  .chip.active {
+    background: var(--accent-soft);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .filters input[type="search"] {
+    margin-left: auto;
+    max-width: 220px;
+  }
+
+  /* table */
+  .table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: var(--bg-raised);
+    box-shadow: var(--shadow);
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 920px;
+  }
+  thead th {
+    text-align: left;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line);
+    white-space: nowrap;
+  }
+  tbody td {
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--line-soft);
+    font-size: 14.5px;
+    vertical-align: middle;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: var(--line-soft); }
+  td.company { font-weight: 600; }
+  td.role { color: var(--ink-soft); }
+  td.date, td.interview-date {
+    font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .status-select {
+    font-weight: 600;
+    font-size: 12.5px;
+    border: none;
+    border-radius: 999px;
+    padding: 5px 10px 5px 12px;
+    cursor: pointer;
+  }
+  .status-select.applied { background: var(--applied-bg); color: var(--applied); }
+  .status-select.interview { background: var(--interview-bg); color: var(--interview); }
+  .status-select.offer { background: var(--offer-bg); color: var(--offer); }
+  .status-select.rejected { background: var(--rejected-bg); color: var(--rejected); }
+  .status-select.ghosted { background: var(--ghosted-bg); color: var(--ghosted); }
+
+  td.notes {
+    color: var(--ink-soft);
+    font-size: 13.5px;
+    max-width: 190px;
+  }
+  td.notes input {
+    border: 1px solid transparent;
+    background: transparent;
+    padding: 6px 8px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+  td.notes input:hover { border-color: var(--line); }
+  td.notes input:focus { border-color: var(--accent); background: var(--bg); }
+
+  .prep-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    background: var(--bg);
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 5px 11px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+  .prep-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .prep-btn .frac {
+    font-family: "SF Mono", "Cascadia Code", Consolas, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+  .prep-btn.done { border-color: var(--offer); color: var(--offer); }
+
+  .del {
+    background: none;
+    border: none;
+    color: var(--ink-faint);
+    cursor: pointer;
+    font-size: 16px;
+    line-height: 1;
+    padding: 4px 6px;
+    border-radius: 6px;
+  }
+  .del:hover { color: var(--rejected); background: var(--rejected-bg); }
+
+  .empty {
+    padding: 48px 24px;
+    text-align: center;
+    color: var(--ink-faint);
+    font-size: 14px;
+  }
+
+  a.link { color: inherit; }
+
+  #fileInput { display: none; }
+
+  /* modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--overlay);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 40px 20px;
+    overflow-y: auto;
+    z-index: 50;
+  }
+  .modal-overlay[hidden] { display: none; }
+  .modal {
+    background: var(--bg-raised);
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    max-width: 560px;
+    width: 100%;
+    padding: 24px;
+    box-shadow: var(--shadow);
+  }
+  .modal-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 18px;
+  }
+  .modal-head h2 {
+    font-size: 20px;
+    margin: 0 0 3px;
+    font-weight: 600;
+  }
+  .modal-head .role-line {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: var(--ink-faint);
+    cursor: pointer;
+    line-height: 1;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+  .modal-close:hover { background: var(--line-soft); color: var(--ink); }
+
+  .modal-section { margin-bottom: 20px; }
+  .modal-section:last-child { margin-bottom: 0; }
+  .modal-section h3 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-faint);
+    margin: 0 0 10px;
+    font-weight: 600;
+  }
+  .modal-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .modal-row + .modal-row { margin-top: 10px; }
+  .modal-row.three { grid-template-columns: 1fr 1fr 1fr; }
+
+  .checklist { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
+  .checklist li {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .checklist input[type="checkbox"] {
+    width: 17px;
+    height: 17px;
+    flex-shrink: 0;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+  .checklist .text {
+    flex: 1;
+    font-size: 14px;
+    border: none;
+    background: transparent;
+    padding: 4px 2px;
+  }
+  .checklist li.done .text { color: var(--ink-faint); text-decoration: line-through; }
+  .checklist .remove-item {
+    background: none;
+    border: none;
+    color: var(--ink-faint);
+    cursor: pointer;
+    font-size: 15px;
+    padding: 2px 6px;
+  }
+  .checklist .remove-item:hover { color: var(--rejected); }
+  .add-item-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .add-item-row input { flex: 1; }
+  .add-item-row button { flex-shrink: 0; }
+
+  .modal textarea { min-height: 70px; resize: vertical; }
+
+  .ics-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .ics-hint { font-size: 12.5px; color: var(--ink-faint); }
+
+  @media (max-width: 760px) {
+    .add-grid { grid-template-columns: 1fr 1fr; }
+    .add-grid button { grid-column: 1 / -1; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    table { min-width: 780px; }
+    .banner { flex-wrap: wrap; }
+    .modal-row, .modal-row.three { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Job Search Log</div>
+    <h1>Where every application stands</h1>
+    <p class="sub">Log a role the day you apply, track prep for each interview, and keep a spreadsheet copy in sync. Saved locally in this browser.</p>
+  </header>
+
+  <div class="top-actions">
+    <button class="outline" id="exportBtn">Export spreadsheet (.csv)</button>
+    <button class="outline" id="importBtn">Import spreadsheet (.csv)</button>
+    <input type="file" id="fileInput" accept=".csv,text/csv" />
+  </div>
+
+  <div class="banner" id="banner" style="display:none;">
+    <div class="stripe"></div>
+    <div class="body">
+      <div class="label">Next up</div>
+      <div class="detail" id="bannerText"></div>
+    </div>
+    <div class="actions">
+      <button class="solid" id="bannerPrep">Open prep</button>
+      <button class="outline" id="bannerIcs">Add to calendar</button>
+    </div>
+  </div>
+
+  <div class="stats" id="stats"></div>
+
+  <form class="add" id="addForm">
+    <div class="add-grid">
+      <div class="field">
+        <label for="company">Company</label>
+        <input id="company" required placeholder="e.g. Acme Corp" />
+      </div>
+      <div class="field">
+        <label for="role">Role</label>
+        <input id="role" required placeholder="e.g. Product Designer" />
+      </div>
+      <div class="field">
+        <label for="date">Applied</label>
+        <input id="date" type="date" required />
+      </div>
+      <div class="field">
+        <label for="link">Posting link</label>
+        <input id="link" type="url" placeholder="optional" />
+      </div>
+      <button class="primary" type="submit">Add application</button>
+    </div>
+  </form>
+
+  <div class="filters" id="filters"></div>
+
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Role</th>
+          <th>Applied</th>
+          <th>Status</th>
+          <th>Interview</th>
+          <th>Notes</th>
+          <th>Prep</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty" id="emptyMsg" style="display:none;">No applications logged yet — add your first one above.</div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="prepModal" hidden>
+  <div class="modal">
+    <div class="modal-head">
+      <div>
+        <h2 id="prepTitleCompany"></h2>
+        <div class="role-line" id="prepTitleRole"></div>
+      </div>
+      <button class="modal-close" id="prepClose" aria-label="Close">&times;</button>
+    </div>
+
+    <div class="modal-section">
+      <h3>Interview details</h3>
+      <div class="modal-row three">
+        <div class="field">
+          <label for="prepRound">Round</label>
+          <select id="prepRound">
+            <option value="">—</option>
+            <option>Phone screen</option>
+            <option>Technical</option>
+            <option>Onsite</option>
+            <option>Take-home</option>
+            <option>Final</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="prepFormat">Format</label>
+          <select id="prepFormat">
+            <option value="">—</option>
+            <option>Phone</option>
+            <option>Video</option>
+            <option>Onsite</option>
+            <option>Take-home</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="prepInterviewer">Interviewer(s)</label>
+          <input id="prepInterviewer" placeholder="optional" />
+        </div>
+      </div>
+      <div class="modal-row">
+        <div class="field">
+          <label for="prepDate">Interview date</label>
+          <input id="prepDate" type="date" />
+        </div>
+        <div class="field">
+          <label for="prepTime">Interview time</label>
+          <input id="prepTime" type="time" />
+        </div>
+      </div>
+      <div class="ics-row">
+        <button class="outline" id="prepIcs">Download calendar invite (.ics)</button>
+        <span class="ics-hint" id="icsHint">Set a date and time to enable</span>
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <h3>Prep deadline</h3>
+      <div class="field">
+        <label for="prepDeadline">Have prep done by</label>
+        <input id="prepDeadline" type="date" />
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <h3>Prep checklist</h3>
+      <ul class="checklist" id="prepChecklist"></ul>
+      <div class="add-item-row">
+        <input id="prepNewItem" placeholder="Add a prep task…" />
+        <button class="outline" id="prepAddItem">Add</button>
+      </div>
+    </div>
+
+    <div class="modal-section">
+      <h3>Notes</h3>
+      <textarea id="prepNotes" placeholder="Impressions, follow-ups, anything else…"></textarea>
+    </div>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = "job-search-log-v2";
+  const STATUSES = [
+    { id: "applied", label: "Applied" },
+    { id: "interview", label: "Interview" },
+    { id: "offer", label: "Offer" },
+    { id: "rejected", label: "Rejected" },
+    { id: "ghosted", label: "Ghosted" },
+  ];
+  const DEFAULT_CHECKLIST = [
+    "Research the company",
+    "Review the job description",
+    "Prepare 3 questions to ask",
+    "Practice likely interview questions",
+  ];
+  const CSV_COLUMNS = [
+    "company", "role", "date", "link", "status", "notes",
+    "round", "format", "interviewer", "interviewDate", "interviewTime",
+    "prepDeadline", "prepNotes", "prepChecklist",
+  ];
+
+  let apps = load();
+  let activeFilter = "all";
+  let currentPrepId = null;
+
+  function load() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function save() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(apps));
+  }
+
+  function uid() {
+    return Math.random().toString(36).slice(2, 10);
+  }
+
+  function newChecklist() {
+    return DEFAULT_CHECKLIST.map((text) => ({ id: uid(), text, done: false }));
+  }
+
+  function fmtDate(iso) {
+    if (!iso) return "—";
+    const d = new Date(iso + "T00:00:00");
+    return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+  }
+
+  function fmtTime(t) {
+    if (!t) return "";
+    const [h, m] = t.split(":").map(Number);
+    const period = h >= 12 ? "PM" : "AM";
+    const h12 = h % 12 === 0 ? 12 : h % 12;
+    return `${h12}:${String(m).padStart(2, "0")} ${period}`;
+  }
+
+  function escapeHtml(str) {
+    return String(str).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    }[c]));
+  }
+  function escapeAttr(str) { return escapeHtml(str); }
+
+  /* ---------- stats + banner ---------- */
+
+  function renderStats() {
+    const counts = { total: apps.length, applied: 0, interview: 0, offer: 0, rejected: 0 };
+    apps.forEach((a) => {
+      if (a.status === "applied") counts.applied++;
+      else if (a.status === "interview") counts.interview++;
+      else if (a.status === "offer") counts.offer++;
+      else if (a.status === "rejected") counts.rejected++;
+    });
+    document.getElementById("stats").innerHTML = `
+      <div class="stat total"><div class="n">${counts.total}</div><div class="l">Total</div></div>
+      <div class="stat applied"><div class="n">${counts.applied}</div><div class="l">Applied</div></div>
+      <div class="stat interview"><div class="n">${counts.interview}</div><div class="l">Interviewing</div></div>
+      <div class="stat offer"><div class="n">${counts.offer}</div><div class="l">Offers</div></div>
+      <div class="stat rejected"><div class="n">${counts.rejected}</div><div class="l">Rejected</div></div>
+    `;
+  }
+
+  function renderBanner() {
+    const now = new Date();
+    const todayIso = now.toISOString().slice(0, 10);
+    const upcoming = apps
+      .filter((a) => a.interviewDate && a.interviewDate >= todayIso)
+      .sort((a, b) => (a.interviewDate + (a.interviewTime || "")).localeCompare(b.interviewDate + (b.interviewTime || "")));
+
+    const banner = document.getElementById("banner");
+    if (upcoming.length === 0) {
+      banner.style.display = "none";
+      return;
+    }
+    const next = upcoming[0];
+    banner.style.display = "flex";
+    document.getElementById("bannerText").innerHTML =
+      `<b>${escapeHtml(next.company)}</b> — ${escapeHtml(next.role)}, ${fmtDate(next.interviewDate)}${next.interviewTime ? " at " + fmtTime(next.interviewTime) : ""}`;
+    document.getElementById("bannerPrep").onclick = () => openPrep(next.id);
+    document.getElementById("bannerIcs").onclick = () => downloadIcs(next);
+  }
+
+  /* ---------- filters + rows ---------- */
+
+  function renderFilters() {
+    const el = document.getElementById("filters");
+    const all = [{ id: "all", label: "All" }, ...STATUSES];
+    el.innerHTML = all
+      .map((s) => `<button class="chip ${activeFilter === s.id ? "active" : ""}" data-filter="${s.id}">${s.label}</button>`)
+      .join("") + `<input type="search" id="search" placeholder="Search company or role" />`;
+
+    el.querySelectorAll(".chip").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        activeFilter = btn.dataset.filter;
+        renderFilters();
+        renderRows();
+      });
+    });
+    document.getElementById("search").addEventListener("input", renderRows);
+  }
+
+  function renderRows() {
+    const searchEl = document.getElementById("search");
+    const query = (searchEl ? searchEl.value : "").trim().toLowerCase();
+
+    let list = apps.slice().sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+    if (activeFilter !== "all") list = list.filter((a) => a.status === activeFilter);
+    if (query) {
+      list = list.filter((a) => a.company.toLowerCase().includes(query) || a.role.toLowerCase().includes(query));
+    }
+
+    const tbody = document.getElementById("rows");
+    const emptyMsg = document.getElementById("emptyMsg");
+
+    if (list.length === 0) {
+      tbody.innerHTML = "";
+      emptyMsg.style.display = "block";
+      emptyMsg.textContent = apps.length === 0
+        ? "No applications logged yet — add your first one above."
+        : "Nothing matches this filter.";
+      return;
+    }
+    emptyMsg.style.display = "none";
+
+    tbody.innerHTML = list.map((a) => {
+      const companyCell = a.link
+        ? `<a class="link" href="${escapeAttr(a.link)}" target="_blank" rel="noopener noreferrer">${escapeHtml(a.company)}</a>`
+        : escapeHtml(a.company);
+      const checklist = a.prepChecklist || [];
+      const doneCount = checklist.filter((i) => i.done).length;
+      const prepDone = checklist.length > 0 && doneCount === checklist.length;
+      const interviewCell = a.interviewDate
+        ? `${fmtDate(a.interviewDate)}${a.interviewTime ? "<br>" + fmtTime(a.interviewTime) : ""}`
+        : "—";
+
+      return `
+        <tr data-id="${a.id}">
+          <td class="company">${companyCell}</td>
+          <td class="role">${escapeHtml(a.role)}</td>
+          <td class="date">${fmtDate(a.date)}</td>
+          <td>
+            <select class="status-select ${a.status}" data-id="${a.id}" data-action="status">
+              ${STATUSES.map((s) => `<option value="${s.id}" ${s.id === a.status ? "selected" : ""}>${s.label}</option>`).join("")}
+            </select>
+          </td>
+          <td class="interview-date">${interviewCell}</td>
+          <td class="notes"><input type="text" value="${escapeAttr(a.notes || "")}" placeholder="add a note" data-id="${a.id}" data-action="notes" /></td>
+          <td><button class="prep-btn ${prepDone ? "done" : ""}" data-id="${a.id}" data-action="prep"><span class="frac">${doneCount}/${checklist.length}</span> prep</button></td>
+          <td><button class="del" data-id="${a.id}" data-action="delete" title="Remove" aria-label="Remove application">&times;</button></td>
+        </tr>`;
+    }).join("");
+
+    tbody.querySelectorAll('[data-action="status"]').forEach((sel) => {
+      sel.addEventListener("change", (e) => {
+        const app = apps.find((a) => a.id === e.target.dataset.id);
+        app.status = e.target.value;
+        save(); renderStats(); renderRows(); renderBanner();
+      });
+    });
+    tbody.querySelectorAll('[data-action="notes"]').forEach((inp) => {
+      inp.addEventListener("change", (e) => {
+        const app = apps.find((a) => a.id === e.target.dataset.id);
+        app.notes = e.target.value;
+        save();
+      });
+    });
+    tbody.querySelectorAll('[data-action="delete"]').forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        apps = apps.filter((a) => a.id !== e.target.dataset.id);
+        save(); renderStats(); renderRows(); renderBanner();
+      });
+    });
+    tbody.querySelectorAll('[data-action="prep"]').forEach((btn) => {
+      btn.addEventListener("click", (e) => openPrep(e.currentTarget.dataset.id));
+    });
+  }
+
+  /* ---------- prep modal ---------- */
+
+  function openPrep(id) {
+    const app = apps.find((a) => a.id === id);
+    if (!app) return;
+    if (!app.prepChecklist) app.prepChecklist = newChecklist();
+    currentPrepId = id;
+
+    document.getElementById("prepTitleCompany").textContent = app.company;
+    document.getElementById("prepTitleRole").textContent = app.role;
+    document.getElementById("prepRound").value = app.round || "";
+    document.getElementById("prepFormat").value = app.format || "";
+    document.getElementById("prepInterviewer").value = app.interviewer || "";
+    document.getElementById("prepDate").value = app.interviewDate || "";
+    document.getElementById("prepTime").value = app.interviewTime || "";
+    document.getElementById("prepDeadline").value = app.prepDeadline || "";
+    document.getElementById("prepNotes").value = app.prepNotes || "";
+
+    renderChecklist();
+    updateIcsHint();
+    document.getElementById("prepModal").hidden = false;
+  }
+
+  function closePrep() {
+    document.getElementById("prepModal").hidden = true;
+    currentPrepId = null;
+    renderRows();
+    renderBanner();
+  }
+
+  function currentApp() {
+    return apps.find((a) => a.id === currentPrepId);
+  }
+
+  function renderChecklist() {
+    const app = currentApp();
+    if (!app) return;
+    const ul = document.getElementById("prepChecklist");
+    ul.innerHTML = app.prepChecklist.map((item) => `
+      <li class="${item.done ? "done" : ""}" data-item="${item.id}">
+        <input type="checkbox" ${item.done ? "checked" : ""} data-action="toggle" />
+        <input type="text" class="text" value="${escapeAttr(item.text)}" data-action="edit" />
+        <button class="remove-item" data-action="remove" aria-label="Remove item">&times;</button>
+      </li>
+    `).join("");
+
+    ul.querySelectorAll('[data-action="toggle"]').forEach((cb) => {
+      cb.addEventListener("change", (e) => {
+        const itemId = e.target.closest("li").dataset.item;
+        const item = app.prepChecklist.find((i) => i.id === itemId);
+        item.done = e.target.checked;
+        save(); renderChecklist();
+      });
+    });
+    ul.querySelectorAll('[data-action="edit"]').forEach((inp) => {
+      inp.addEventListener("change", (e) => {
+        const itemId = e.target.closest("li").dataset.item;
+        const item = app.prepChecklist.find((i) => i.id === itemId);
+        item.text = e.target.value;
+        save();
+      });
+    });
+    ul.querySelectorAll('[data-action="remove"]').forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        const itemId = e.target.closest("li").dataset.item;
+        app.prepChecklist = app.prepChecklist.filter((i) => i.id !== itemId);
+        save(); renderChecklist();
+      });
+    });
+  }
+
+  document.getElementById("prepAddItem").addEventListener("click", () => {
+    const app = currentApp();
+    const input = document.getElementById("prepNewItem");
+    const text = input.value.trim();
+    if (!text || !app) return;
+    app.prepChecklist.push({ id: uid(), text, done: false });
+    input.value = "";
+    save(); renderChecklist();
+  });
+  document.getElementById("prepNewItem").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") { e.preventDefault(); document.getElementById("prepAddItem").click(); }
+  });
+
+  [["prepRound", "round"], ["prepFormat", "format"], ["prepInterviewer", "interviewer"],
+   ["prepDate", "interviewDate"], ["prepTime", "interviewTime"],
+   ["prepDeadline", "prepDeadline"], ["prepNotes", "prepNotes"]].forEach(([elId, field]) => {
+    document.getElementById(elId).addEventListener("change", (e) => {
+      const app = currentApp();
+      if (!app) return;
+      app[field] = e.target.value;
+      save();
+      if (field === "interviewDate" || field === "interviewTime") updateIcsHint();
+    });
+  });
+
+  function updateIcsHint() {
+    const app = currentApp();
+    const hint = document.getElementById("icsHint");
+    const btn = document.getElementById("prepIcs");
+    if (app && app.interviewDate) {
+      hint.textContent = app.interviewTime ? "" : "No time set — invite will default to 9:00 AM";
+      btn.disabled = false;
+    } else {
+      hint.textContent = "Set a date to enable";
+      btn.disabled = true;
+    }
+  }
+
+  document.getElementById("prepClose").addEventListener("click", closePrep);
+  document.getElementById("prepModal").addEventListener("click", (e) => {
+    if (e.target.id === "prepModal") closePrep();
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !document.getElementById("prepModal").hidden) closePrep();
+  });
+
+  document.getElementById("prepIcs").addEventListener("click", () => {
+    const app = currentApp();
+    if (app) downloadIcs(app);
+  });
+
+  /* ---------- ICS calendar export ---------- */
+
+  function pad(n) { return String(n).padStart(2, "0"); }
+
+  function downloadIcs(app) {
+    if (!app.interviewDate) return;
+    const [y, mo, d] = app.interviewDate.split("-").map(Number);
+    const [h, mi] = (app.interviewTime || "09:00").split(":").map(Number);
+    const start = new Date(y, mo - 1, d, h, mi);
+    const end = new Date(start.getTime() + 60 * 60 * 1000);
+
+    const stamp = (dt) => `${dt.getFullYear()}${pad(dt.getMonth() + 1)}${pad(dt.getDate())}T${pad(dt.getHours())}${pad(dt.getMinutes())}00`;
+    const now = new Date();
+    const dtstamp = `${now.getUTCFullYear()}${pad(now.getUTCMonth() + 1)}${pad(now.getUTCDate())}T${pad(now.getUTCHours())}${pad(now.getUTCMinutes())}00Z`;
+
+    const descParts = [];
+    if (app.round) descParts.push(`Round: ${app.round}`);
+    if (app.interviewer) descParts.push(`Interviewer: ${app.interviewer}`);
+    if (app.prepNotes) descParts.push(app.prepNotes);
+    const description = descParts.join("\\n");
+
+    const lines = [
+      "BEGIN:VCALENDAR",
+      "VERSION:2.0",
+      "PRODID:-//Job Search Log//EN",
+      "BEGIN:VEVENT",
+      `UID:${app.id}@job-search-log`,
+      `DTSTAMP:${dtstamp}`,
+      `DTSTART:${stamp(start)}`,
+      `DTEND:${stamp(end)}`,
+      `SUMMARY:Interview: ${app.role} at ${app.company}`,
+      description ? `DESCRIPTION:${description}` : "",
+      app.format ? `LOCATION:${app.format}` : "",
+      "END:VEVENT",
+      "END:VCALENDAR",
+    ].filter(Boolean);
+
+    const blob = new Blob([lines.join("\r\n")], { type: "text/calendar" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${app.company.replace(/[^a-z0-9]+/gi, "-")}-interview.ics`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  /* ---------- CSV export / import ---------- */
+
+  function csvEscape(val) {
+    const s = val === undefined || val === null ? "" : String(val);
+    if (/[",\n\r]/.test(s)) return `"${s.replace(/"/g, '""')}"`;
+    return s;
+  }
+
+  function serializeChecklist(list) {
+    return (list || []).map((i) => `${i.text.replace(/\|/g, "/")}|${i.done ? 1 : 0}`).join(";;");
+  }
+  function parseChecklist(str) {
+    if (!str) return [];
+    return str.split(";;").filter(Boolean).map((chunk) => {
+      const idx = chunk.lastIndexOf("|");
+      const text = idx === -1 ? chunk : chunk.slice(0, idx);
+      const done = idx === -1 ? false : chunk.slice(idx + 1) === "1";
+      return { id: uid(), text, done };
+    });
+  }
+
+  function exportCsv() {
+    const header = CSV_COLUMNS.join(",");
+    const rows = apps.map((a) => CSV_COLUMNS.map((col) => {
+      if (col === "prepChecklist") return csvEscape(serializeChecklist(a.prepChecklist));
+      return csvEscape(a[col]);
+    }).join(","));
+    const csv = [header, ...rows].join("\r\n");
+    const blob = new Blob(["﻿" + csv], { type: "text/csv;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `job-search-log-${new Date().toISOString().slice(0, 10)}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function parseCsv(text) {
+    const rows = [];
+    let row = [], field = "", inQuotes = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (inQuotes) {
+        if (c === '"') {
+          if (text[i + 1] === '"') { field += '"'; i++; }
+          else inQuotes = false;
+        } else field += c;
+      } else if (c === '"') inQuotes = true;
+      else if (c === ",") { row.push(field); field = ""; }
+      else if (c === "\r") { /* skip */ }
+      else if (c === "\n") { row.push(field); rows.push(row); row = []; field = ""; }
+      else field += c;
+    }
+    if (field.length > 0 || row.length > 0) { row.push(field); rows.push(row); }
+    return rows.filter((r) => r.length > 1 || r[0] !== "");
+  }
+
+  function importCsv(text) {
+    const rows = parseCsv(text);
+    if (rows.length < 1) return;
+    const header = rows[0];
+    const dataRows = rows.slice(1);
+    const imported = dataRows.map((r) => {
+      const obj = { id: uid(), status: "applied" };
+      header.forEach((col, idx) => {
+        if (col === "prepChecklist") obj.prepChecklist = parseChecklist(r[idx]);
+        else obj[col] = r[idx] || "";
+      });
+      if (!STATUSES.some((s) => s.id === obj.status)) obj.status = "applied";
+      if (!obj.prepChecklist) obj.prepChecklist = newChecklist();
+      return obj;
+    }).filter((o) => o.company);
+
+    if (imported.length === 0) {
+      alert("No valid rows found in that file.");
+      return;
+    }
+    const replace = confirm(`Import ${imported.length} application(s)? Click OK to replace your current log, or Cancel to add these alongside what's already here.`);
+    apps = replace ? imported : apps.concat(imported);
+    save(); renderStats(); renderRows(); renderBanner();
+  }
+
+  document.getElementById("exportBtn").addEventListener("click", exportCsv);
+  document.getElementById("importBtn").addEventListener("click", () => document.getElementById("fileInput").click());
+  document.getElementById("fileInput").addEventListener("change", (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => importCsv(reader.result);
+    reader.readAsText(file);
+    e.target.value = "";
+  });
+
+  /* ---------- add form ---------- */
+
+  document.getElementById("addForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const company = document.getElementById("company").value.trim();
+    const role = document.getElementById("role").value.trim();
+    const date = document.getElementById("date").value;
+    const link = document.getElementById("link").value.trim();
+    if (!company || !role || !date) return;
+
+    apps.push({
+      id: uid(), company, role, date, link, status: "applied", notes: "",
+      round: "", format: "", interviewer: "", interviewDate: "", interviewTime: "",
+      prepDeadline: "", prepNotes: "", prepChecklist: newChecklist(),
+    });
+    save(); renderStats(); renderRows(); renderBanner();
+    e.target.reset();
+    document.getElementById("company").focus();
+  });
+
+  document.getElementById("date").valueAsDate = new Date();
+
+  renderStats();
+  renderFilters();
+  renderRows();
+  renderBanner();
+</script>
