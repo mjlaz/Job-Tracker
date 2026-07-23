@@ -14,3 +14,7 @@ To host it live via GitHub Pages: **Settings → Pages → Deploy from branch �
 - Per-interview prep checklist, round/format/interviewer notes, and a prep deadline
 - Calendar invite (`.ics`) download for scheduled interviews
 - Export/import as CSV — opens directly in Excel, Google Sheets, or Numbers
+
+## How it works
+
+See [DOCUMENTATION.md](DOCUMENTATION.md) for the data model, the CSV/`.ics` file formats, theming, and how to customize it.
